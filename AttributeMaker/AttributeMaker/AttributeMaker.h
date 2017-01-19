@@ -16,6 +16,7 @@
  */
 @property (nonatomic) NSMutableAttributedString *attributeStr;
 
++ (NSMutableAttributedString *)attributeMaker:(void(^)(AttributeMaker *maker))attriMaker;
 
 /**
  * 重要
@@ -123,6 +124,10 @@
 - (AttributeMaker *(^)(UIImage*,CGRect,NSInteger))addImage;
 
 
+/**
+ * 插入文字
+ */
+- (AttributeMaker *(^)(NSString *,NSInteger))addString;
 
 
 ////添加图片2

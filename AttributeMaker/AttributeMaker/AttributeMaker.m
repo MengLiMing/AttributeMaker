@@ -21,7 +21,13 @@
 
 @implementation AttributeMaker
 
-
++ (NSMutableAttributedString *)attributeMaker:(void(^)(AttributeMaker *maker))attriMaker {
+    AttributeMaker *maker = [[AttributeMaker alloc] init];
+    if (attriMaker) {
+        attriMaker(maker);
+    }
+    return maker.attributeStr;
+}
 
 - (AttributeMaker *(^)(NSString *))text {
     return ^(NSString *text) {
@@ -243,6 +249,19 @@
 }
 
 
+- (AttributeMaker *(^)(NSString *,NSInteger))addString {
+    return ^(NSString *string, NSInteger index) {
+        return [self addString:string atIndex:index];
+    };
+}
+
+
+- (AttributeMaker *)addString:(NSString *)string atIndex:(NSInteger)index {
+    
+    NSAttributedString *attribute = [[NSAttributedString alloc] initWithString:string];
+    [self.attributeStr insertAttributedString:attribute atIndex:index];
+    return self;
+}
 
 
 
